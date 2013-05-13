@@ -14,7 +14,7 @@ Searching
 Adding A Note
 >note ruby -a "Ruby is an awesome tool for making command line apps"
 
-Deleting a notea
+Deleting a note
 
 >note ruby -d
 
