@@ -1,3 +1,4 @@
+# encoding: UTF-8	
 require "optparse"
 require "find"
 require "pry"
@@ -6,19 +7,25 @@ NOTE_PATH = "/Users/#{ENV['USER']}/Dropbox/notational_data"
 
 @options = {}
 
-option_parser = OptionParser.new do |opts|
+@option_parser = OptionParser.new do |opts|
+
+	executable_name = File.basename($PROGRAM_NAME)
+
+	opts.banner = "\nAdd notes via the command line to notational velocity and share on dropbox\n"
+	opts.banner << "Change your notational velocity preferences to use the following path: #{NOTE_PATH}\n\n"
+	opts.banner << "Usage: #{executable_name} <title> [options] <\"note\">"
 	
-	opts.on("-a ADD") do |note|
+	opts.on("-a ADD", "Add a new note") do |note|
 		@options[:note] = note
 	end
 
-	opts.on("-d", "--delete") do
+	opts.on("-d", "--delete", "delete an existing note") do
 		@options[:delete] = true
 	end
 
 end
 
-option_parser.parse!
+@option_parser.parse!
 
 def add_note
   title = ARGV.join(" ").rstrip
@@ -40,6 +47,11 @@ def delete_note
 end
 
 def search_note
+	if ARGV.empty?
+		puts "You must supply some search criteria"
+		puts @option_parser.help
+		exit
+	end
   search_param = ARGV.join(" ")
   Find.find("/Users/#{ENV['USER']}/Dropbox/notational_data/") do |file|
     unless file[".txt"].nil?
