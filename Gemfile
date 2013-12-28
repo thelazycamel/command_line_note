@@ -3,4 +3,7 @@ source 'https://rubygems.org'
 gem 'optparse'
 gem 'rainbow'
 
-gem 'pry'
+group :development, :test do
+  gem 'rspec'
+  gem 'pry'
+end
