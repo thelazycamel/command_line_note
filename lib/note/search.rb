@@ -9,7 +9,7 @@ module Note
 
     def search_note
       #TODO Tidy this up
-      Find.find("/Users/#{ENV['USER']}/Dropbox/notational_data/") do |file|
+      Find.find(NOTE_PATH) do |file|
         unless file[".txt"].nil?
           if file["#{search_param}.txt"]
             File.open(file, "r").each_line do |line|

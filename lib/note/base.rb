@@ -2,7 +2,7 @@
 
 module Note
 
-  NOTE_PATH = "/Users/#{ENV['USER']}/Dropbox/notational_data"
+  NOTE_PATH = "/Users/#{ENV['USER']}/Library/CloudStorage/Dropbox/"
 
   class Base
 
@@ -44,6 +44,10 @@ module Note
 
         opts.on("-a ADD", "Add a new note") do |note|
           @options[:note] = note
+        end
+
+        opts.on("-o", "--open", "open editor at #{NOTE_PATH}") do
+          @options[:open] = true
         end
 
         opts.on("-d", "--delete", "delete an existing note") do
